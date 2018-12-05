@@ -235,7 +235,11 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
         cell.tag = currentTag
 
         let asset = images[(indexPath as NSIndexPath).item]
-
+        // 添加数字标号
+        if let index = selectedAssets.firstIndex(where: { $0 == asset}) {
+            cell.num = index + 1
+        }
+        
         imageManager?.requestImage(for: asset,
                                         targetSize: cellSize,
                                         contentMode: .aspectFill,
@@ -263,6 +267,10 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if photoSelectionLimit > 0 && selectedImages.count + 1 <= photoSelectionLimit {
+            // 点击之后直接更新数字
+            var cell = collectionView.cellForItem(at: indexPath) as! FSAlbumViewCell
+            cell.num = selectedImages.count + 1
+            
             changeImage(images[(indexPath as NSIndexPath).row])
 
             imageCropView.changeScrollable(true)
@@ -292,6 +300,14 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
         if let selected = selectedAsset {
             selectedImages.remove(at: selected.offset)
             selectedAssets.remove(at: selected.offset)
+            // 重新更新数字
+            for (i,item) in selectedAssets.enumerated() {
+                let index = images.index(of: item) // index 一定大于负数
+                var indexPath = IndexPath(row: index, section: 0)
+                if let  cell = collectionView.cellForItem(at: indexPath) as? FSAlbumViewCell{
+                    cell.num = i + 1
+                }
+            }
         }
 
         if selectedImages.count > 0 {

@@ -27,10 +27,14 @@ class ViewController: UIViewController, FusumaDelegate {
         fusuma.delegate = self
         fusuma.cropHeightRatio = 1.0
         fusuma.allowMultipleSelection = true
-        fusuma.availableModes = [.library, .video, .camera]
+        //fusuma.availableModes = [.library, .video, .camera]
+        fusuma.availableModes = [.library, .camera]
         fusuma.photoSelectionLimit = 4
         fusumaSavesImage = true
 
+        //fusumaBackgroundColor = UIColor.orange
+       // fusumaCheckImage = UIImage(named: "bringall-相机-icon6下一步")
+    
         present(fusuma, animated: true, completion: nil)
     }
 
@@ -63,6 +67,31 @@ class ViewController: UIViewController, FusumaDelegate {
         }
     }
 
+    
+    func fusumaMultipleImageSelected(_ images: [UIImage], source: FusumaMode, metaData: [ImageMetadata]) {
+        print("Number of selection images: \(images.count)")
+        
+        var count: Double = 0
+        
+        for image in images {
+            DispatchQueue.main.asyncAfter(deadline: .now() + (3.0 * count)) {
+                self.imageView.image = image
+                print("w: \(image.size.width) - h: \(image.size.height)")
+            }
+            
+            count += 1
+        }
+        for image in metaData {
+           // DispatchQueue.main.asyncAfter(deadline: .now() + (3.0 * count)) {
+               
+                print("==>w: \(image.pixelWidth) - h: \(image.pixelHeight)")
+           // }
+           
+           // count += 1
+        }
+    }
+    
+    
     func fusumaImageSelected(_ image: UIImage, source: FusumaMode, metaData: ImageMetadata) {
         print("Image mediatype: \(metaData.mediaType)")
         print("Source image size: \(metaData.pixelWidth)x\(metaData.pixelHeight)")

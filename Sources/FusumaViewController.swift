@@ -464,6 +464,16 @@ public struct ImageMetadata {
 }
 
 extension FusumaViewController: FSAlbumViewDelegate, FSCameraViewDelegate, FSVideoCameraViewDelegate {
+   
+    
+    func closeByHandler() {
+        self.delegate?.fusumaWillClosed()
+        
+        self.doDismiss {
+            self.delegate?.fusumaClosed()
+        }
+    }
+    
     public func albumbSelectionLimitReached() {
         delegate?.fusumaLimitReached()
     }
@@ -531,13 +541,16 @@ private extension FusumaViewController {
 
         dishighlightButtons()
         updateDoneButtonVisibility()
-
+        menuView.isHidden = false
         switch mode {
         case .library:
             titleLabel.text = NSLocalizedString(fusumaCameraRollTitle, comment: fusumaCameraRollTitle)
             highlightButton(libraryButton)
             view.bringSubviewToFront(photoLibraryViewerContainer)
         case .camera:
+            // 自己定义隐藏原菜单
+            menuView.isHidden = true
+            
             titleLabel.text = NSLocalizedString(fusumaCameraTitle, comment: fusumaCameraTitle)
             highlightButton(cameraButton)
             view.bringSubviewToFront(cameraShotContainer)

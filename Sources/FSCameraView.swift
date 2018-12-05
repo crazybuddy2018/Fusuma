@@ -13,9 +13,18 @@ import Photos
 
 @objc protocol FSCameraViewDelegate: class {
     func cameraShotFinished(_ image: UIImage)
+    
+    func closeByHandler()  // 添加关闭按钮的响应
+    
+    
+    
 }
 
 final class FSCameraView: UIView, UIGestureRecognizerDelegate {
+    
+    
+    @IBOutlet weak var closeButton: UIButton!
+    
     @IBOutlet weak var previewViewContainer: UIView!
     @IBOutlet weak var shotButton: UIButton!
     @IBOutlet weak var flashButton: UIButton!
@@ -49,9 +58,13 @@ final class FSCameraView: UIView, UIGestureRecognizerDelegate {
         guard session == nil else { return }
 
         self.backgroundColor = fusumaBackgroundColor
-
+//self.backgroundColor = UIColor.brown
         let bundle = Bundle(for: self.classForCoder)
 
+        let closeImage = fusumaCloseImage != nil ? fusumaCloseImage : UIImage(named: "ic_close", in: bundle, compatibleWith: nil)
+        
+        closeButton.setImage(closeImage?.withRenderingMode(.alwaysTemplate), for: .normal)
+        
         flashOnImage = fusumaFlashOnImage != nil ? fusumaFlashOnImage : UIImage(named: "ic_flash_on", in: bundle, compatibleWith: nil)
         flashOffImage = fusumaFlashOffImage != nil ? fusumaFlashOffImage : UIImage(named: "ic_flash_off", in: bundle, compatibleWith: nil)
         let flipImage = fusumaFlipImage != nil ? fusumaFlipImage : UIImage(named: "ic_loop", in: bundle, compatibleWith: nil)
@@ -59,11 +72,11 @@ final class FSCameraView: UIView, UIGestureRecognizerDelegate {
 
         flashButton.tintColor = fusumaBaseTintColor
         flipButton.tintColor  = fusumaBaseTintColor
-        shotButton.tintColor  = fusumaBaseTintColor
+        //shotButton.tintColor  = fusumaBaseTintColor
 
         flashButton.setImage(flashOffImage?.withRenderingMode(.alwaysTemplate), for: .normal)
         flipButton.setImage(flipImage?.withRenderingMode(.alwaysTemplate), for: .normal)
-        shotButton.setImage(shotImage?.withRenderingMode(.alwaysTemplate), for: .normal)
+        shotButton.setImage(shotImage?.withRenderingMode(.alwaysOriginal), for: .normal)
 
         isHidden = false
 
@@ -204,6 +217,13 @@ final class FSCameraView: UIView, UIGestureRecognizerDelegate {
             }
         })
     }
+    
+    
+    @IBAction func closeHandler(_ sender: UIButton) {
+        delegate?.closeByHandler()
+    }
+    
+    
 
     @IBAction func flipButtonPressed(_ sender: UIButton) {
         guard cameraIsAvailable else { return }

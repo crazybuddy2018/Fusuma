@@ -13,15 +13,26 @@ final class FSAlbumViewCell: UICollectionViewCell {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var checkmarkImageView: UIImageView! {
         didSet {
-            checkmarkImageView.isHidden = true
+           // checkmarkImageView.isHidden = true
         }
     }
-
+    @IBOutlet weak var numButton: UIButton!{
+        didSet{
+            numButton.isHidden = true
+        }
+    }
+    
     var selectedLayer = CALayer()
 
     var image: UIImage? {
         didSet {
             imageView.image = image
+        }
+    }
+    
+    var num = 0 {
+        didSet{
+            numButton.setTitle("\(num)", for: .normal)
         }
     }
 
@@ -30,19 +41,26 @@ final class FSAlbumViewCell: UICollectionViewCell {
 
         isSelected = false
         selectedLayer.backgroundColor = UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 0.5).cgColor
+        
+        numButton.layer.cornerRadius = numButton.bounds.height/2
+        numButton.layer.masksToBounds = true
+        numButton.isUserInteractionEnabled = false
     }
 
     override var isSelected : Bool {
         didSet {
             if selectedLayer.superlayer == self.layer {
                 selectedLayer.removeFromSuperlayer()
-                checkmarkImageView.isHidden = true
+               // checkmarkImageView.isHidden = true
+                numButton.isHidden = true
             }
 
             if isSelected {
                 selectedLayer.frame = self.bounds
                 layer.addSublayer(selectedLayer)
-                checkmarkImageView.isHidden = false
+                //checkmarkImageView.isHidden = false
+                self.bringSubviewToFront(numButton)
+                numButton.isHidden = false
             }
         }
     }

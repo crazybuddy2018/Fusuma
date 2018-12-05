@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,24 +18,74 @@
                     <rect key="frame" x="0.0" y="0.0" width="400" height="500"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZ8-Sp-jjd">
-                            <rect key="frame" x="0.0" y="0.0" width="400" height="500"/>
+                            <rect key="frame" x="0.0" y="64" width="400" height="399"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="SZ8-Sp-jjd" secondAttribute="height" multiplier="3:4" priority="750" constant="1" id="50d-Ra-Hof"/>
+                                <constraint firstAttribute="width" secondItem="SZ8-Sp-jjd" secondAttribute="height" multiplier="1:1" priority="750" constant="1" id="50d-Ra-Hof"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCn-Pn-hUw" userLabel="Spacer">
-                            <rect key="frame" x="0.0" y="500" width="400" height="0.0"/>
+                            <rect key="frame" x="0.0" y="463" width="400" height="37"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FYR-Km-8NT" userLabel="Spacer">
-                            <rect key="frame" x="0.0" y="0.0" width="400" height="0.0"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="0.0" y="0.0" width="400" height="64"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cf2-eo-TZZ">
+                                    <rect key="frame" x="345" y="19" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="Wbh-0c-uHY"/>
+                                        <constraint firstAttribute="height" constant="40" id="m8M-Pd-ZIT"/>
+                                    </constraints>
+                                    <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                                    <state key="normal" image="ic_loop"/>
+                                    <connections>
+                                        <action selector="flipButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="zY0-B4-jSZ"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="De1-Cg-kBb">
+                                    <rect key="frame" x="180" y="19" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="g0F-ZH-8j6"/>
+                                        <constraint firstAttribute="height" constant="40" id="kNB-bN-eie"/>
+                                    </constraints>
+                                    <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
+                                    <state key="normal" image="ic_flash_off"/>
+                                    <connections>
+                                        <action selector="flashButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="GRd-6l-pEk"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DNI-II-UbG">
+                                    <rect key="frame" x="15" y="19" width="40" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="feh-p5-5aa"/>
+                                        <constraint firstAttribute="height" constant="40" id="x1o-O1-xpI"/>
+                                    </constraints>
+                                    <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <state key="normal" image="ic_close">
+                                        <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="closeHandler:" destination="iN0-l3-epB" eventType="touchUpInside" id="m59-sX-QlG"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstItem="De1-Cg-kBb" firstAttribute="centerY" secondItem="cf2-eo-TZZ" secondAttribute="centerY" id="Gye-AA-162"/>
+                                <constraint firstAttribute="height" constant="64" id="YLZ-Fw-EbL"/>
+                                <constraint firstItem="De1-Cg-kBb" firstAttribute="centerY" secondItem="FYR-Km-8NT" secondAttribute="centerY" constant="7" id="ZWu-Gg-wmP"/>
+                                <constraint firstItem="De1-Cg-kBb" firstAttribute="centerX" secondItem="FYR-Km-8NT" secondAttribute="centerX" id="aUa-wD-Ul9"/>
+                                <constraint firstItem="DNI-II-UbG" firstAttribute="leading" secondItem="FYR-Km-8NT" secondAttribute="leading" constant="15" id="boT-Wv-A1x"/>
+                                <constraint firstAttribute="trailing" secondItem="cf2-eo-TZZ" secondAttribute="trailing" constant="15" id="evH-tX-hga"/>
+                                <constraint firstItem="DNI-II-UbG" firstAttribute="centerY" secondItem="cf2-eo-TZZ" secondAttribute="centerY" id="ov0-qI-7J3"/>
+                                <constraint firstAttribute="trailing" secondItem="De1-Cg-kBb" secondAttribute="trailing" constant="180" id="pca-Re-uBR"/>
+                                <constraint firstAttribute="bottom" secondItem="cf2-eo-TZZ" secondAttribute="bottom" constant="5" id="tom-qD-QMc"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="fCn-Pn-hUw" firstAttribute="height" secondItem="FYR-Km-8NT" secondAttribute="height" id="6IG-rH-g4D"/>
                         <constraint firstItem="FYR-Km-8NT" firstAttribute="leading" secondItem="E8u-8j-7AK" secondAttribute="leading" id="Dzt-zg-OwE"/>
                         <constraint firstAttribute="trailing" secondItem="FYR-Km-8NT" secondAttribute="trailing" id="KIg-di-gZi"/>
                         <constraint firstAttribute="trailing" secondItem="fCn-Pn-hUw" secondAttribute="trailing" id="MIk-dI-JwZ"/>
@@ -59,45 +107,20 @@
                                 <constraint firstAttribute="height" constant="68" id="hsf-ex-pEE"/>
                                 <constraint firstAttribute="width" constant="68" id="rPk-4D-nfg"/>
                             </constraints>
+                            <color key="tintColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
-                            <state key="normal" image="ic_shutter"/>
+                            <state key="normal" image="ic_shutter">
+                                <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
                             <connections>
                                 <action selector="shotButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="NK4-1d-Pf0"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cf2-eo-TZZ">
-                            <rect key="frame" x="15" y="30" width="40" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="40" id="Wbh-0c-uHY"/>
-                                <constraint firstAttribute="height" constant="40" id="m8M-Pd-ZIT"/>
-                            </constraints>
-                            <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
-                            <state key="normal" image="ic_loop"/>
-                            <connections>
-                                <action selector="flipButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="zY0-B4-jSZ"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="De1-Cg-kBb">
-                            <rect key="frame" x="345" y="30" width="40" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="40" id="g0F-ZH-8j6"/>
-                                <constraint firstAttribute="height" constant="40" id="kNB-bN-eie"/>
-                            </constraints>
-                            <inset key="contentEdgeInsets" minX="2" minY="2" maxX="2" maxY="2"/>
-                            <state key="normal" image="ic_flash_off"/>
-                            <connections>
-                                <action selector="flashButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="GRd-6l-pEk"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="o8l-Ld-Oon" firstAttribute="centerX" secondItem="oUi-qP-Neb" secondAttribute="centerX" id="2uy-UJ-fI0"/>
-                        <constraint firstAttribute="trailing" secondItem="De1-Cg-kBb" secondAttribute="trailing" constant="15" id="7HT-h5-nDc"/>
                         <constraint firstItem="o8l-Ld-Oon" firstAttribute="centerY" secondItem="oUi-qP-Neb" secondAttribute="centerY" id="8mH-CL-YbA"/>
-                        <constraint firstItem="De1-Cg-kBb" firstAttribute="centerY" secondItem="oUi-qP-Neb" secondAttribute="centerY" id="cU7-qe-tJP"/>
-                        <constraint firstItem="cf2-eo-TZZ" firstAttribute="centerY" secondItem="oUi-qP-Neb" secondAttribute="centerY" id="dIP-Xc-fVX"/>
-                        <constraint firstItem="cf2-eo-TZZ" firstAttribute="leading" secondItem="oUi-qP-Neb" secondAttribute="leading" constant="15" id="qOq-Sy-3cE"/>
                         <constraint firstAttribute="height" constant="100" id="sGm-NU-u2R"/>
                     </constraints>
                 </view>
@@ -115,6 +138,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="closeButton" destination="DNI-II-UbG" id="iOV-y4-DGi"/>
                 <outlet property="flashButton" destination="De1-Cg-kBb" id="vgA-Pn-IaF"/>
                 <outlet property="flipButton" destination="cf2-eo-TZZ" id="m0O-6p-tPs"/>
                 <outlet property="fullAspectRatioConstraint" destination="50d-Ra-Hof" id="6YW-vf-C0C"/>
@@ -125,8 +149,9 @@
         </view>
     </objects>
     <resources>
-        <image name="ic_flash_off" width="48" height="48"/>
-        <image name="ic_loop" width="48" height="48"/>
-        <image name="ic_shutter" width="40" height="40"/>
+        <image name="ic_close" width="96" height="96"/>
+        <image name="ic_flash_off" width="96" height="96"/>
+        <image name="ic_loop" width="96" height="96"/>
+        <image name="ic_shutter" width="168.75" height="168.75"/>
     </resources>
 </document>
