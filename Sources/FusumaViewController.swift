@@ -285,7 +285,8 @@ public struct ImageMetadata {
         }
         cameraView.initialCaptureDevicePosition = cameraPosition
 
-        doneButton.isEnabled = false
+       // doneButton.isEnabled = false
+        albumShouldEnableDoneButton(isEnabled: false)
     }
 
     override public func viewDidAppear(_ animated: Bool) {
@@ -464,9 +465,14 @@ public struct ImageMetadata {
 }
 
 extension FusumaViewController: FSAlbumViewDelegate, FSCameraViewDelegate, FSVideoCameraViewDelegate {
+    
+    public func nextByHandler() {
+         allowMultipleSelection ? fusumaDidFinishInMultipleMode() : fusumaDidFinishInSingleMode()
+    }
+    
    
     
-    func closeByHandler() {
+    public func closeByHandler() {
         self.delegate?.fusumaWillClosed()
         
         self.doDismiss {
@@ -480,6 +486,8 @@ extension FusumaViewController: FSAlbumViewDelegate, FSCameraViewDelegate, FSVid
 
     public func albumShouldEnableDoneButton(isEnabled: Bool) {
         doneButton.isEnabled = isEnabled
+        // 同步相册中的按钮
+        albumView.nextButton.isEnabled = isEnabled
     }
 
     public func getCropHeightRatio() -> CGFloat {
@@ -544,6 +552,8 @@ private extension FusumaViewController {
         menuView.isHidden = false
         switch mode {
         case .library:
+            // 自己定义隐藏原菜单
+            menuView.isHidden = true
             titleLabel.text = NSLocalizedString(fusumaCameraRollTitle, comment: fusumaCameraRollTitle)
             highlightButton(libraryButton)
             view.bringSubviewToFront(photoLibraryViewerContainer)

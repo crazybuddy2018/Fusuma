@@ -18,21 +18,21 @@
                     <rect key="frame" x="0.0" y="0.0" width="400" height="500"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZ8-Sp-jjd">
-                            <rect key="frame" x="0.0" y="64" width="400" height="399"/>
+                            <rect key="frame" x="0.0" y="50" width="400" height="399"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="SZ8-Sp-jjd" secondAttribute="height" multiplier="1:1" priority="750" constant="1" id="50d-Ra-Hof"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCn-Pn-hUw" userLabel="Spacer">
-                            <rect key="frame" x="0.0" y="463" width="400" height="37"/>
+                            <rect key="frame" x="0.0" y="449" width="400" height="51"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FYR-Km-8NT" userLabel="Spacer">
-                            <rect key="frame" x="0.0" y="0.0" width="400" height="64"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FYR-Km-8NT" userLabel="HeaderSpacer">
+                            <rect key="frame" x="0.0" y="0.0" width="400" height="50"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cf2-eo-TZZ">
-                                    <rect key="frame" x="345" y="19" width="40" height="40"/>
+                                    <rect key="frame" x="345" y="9" width="40" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="Wbh-0c-uHY"/>
                                         <constraint firstAttribute="height" constant="40" id="m8M-Pd-ZIT"/>
@@ -44,7 +44,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="De1-Cg-kBb">
-                                    <rect key="frame" x="180" y="19" width="40" height="40"/>
+                                    <rect key="frame" x="180" y="9" width="40" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="g0F-ZH-8j6"/>
                                         <constraint firstAttribute="height" constant="40" id="kNB-bN-eie"/>
@@ -55,8 +55,8 @@
                                         <action selector="flashButtonPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="GRd-6l-pEk"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DNI-II-UbG">
-                                    <rect key="frame" x="15" y="19" width="40" height="40"/>
+                                <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DNI-II-UbG">
+                                    <rect key="frame" x="15" y="9" width="40" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="40" id="feh-p5-5aa"/>
                                         <constraint firstAttribute="height" constant="40" id="x1o-O1-xpI"/>
@@ -72,15 +72,13 @@
                             </subviews>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
-                                <constraint firstItem="De1-Cg-kBb" firstAttribute="centerY" secondItem="cf2-eo-TZZ" secondAttribute="centerY" id="Gye-AA-162"/>
-                                <constraint firstAttribute="height" constant="64" id="YLZ-Fw-EbL"/>
-                                <constraint firstItem="De1-Cg-kBb" firstAttribute="centerY" secondItem="FYR-Km-8NT" secondAttribute="centerY" constant="7" id="ZWu-Gg-wmP"/>
-                                <constraint firstItem="De1-Cg-kBb" firstAttribute="centerX" secondItem="FYR-Km-8NT" secondAttribute="centerX" id="aUa-wD-Ul9"/>
+                                <constraint firstAttribute="trailing" secondItem="cf2-eo-TZZ" secondAttribute="trailing" constant="15" id="H9t-sc-Wdm"/>
+                                <constraint firstItem="De1-Cg-kBb" firstAttribute="centerY" secondItem="cf2-eo-TZZ" secondAttribute="centerY" id="VTk-fr-3Go"/>
+                                <constraint firstAttribute="height" constant="50" id="YLZ-Fw-EbL"/>
                                 <constraint firstItem="DNI-II-UbG" firstAttribute="leading" secondItem="FYR-Km-8NT" secondAttribute="leading" constant="15" id="boT-Wv-A1x"/>
-                                <constraint firstAttribute="trailing" secondItem="cf2-eo-TZZ" secondAttribute="trailing" constant="15" id="evH-tX-hga"/>
+                                <constraint firstAttribute="bottom" secondItem="cf2-eo-TZZ" secondAttribute="bottom" constant="1" id="mMW-GN-cIw"/>
                                 <constraint firstItem="DNI-II-UbG" firstAttribute="centerY" secondItem="cf2-eo-TZZ" secondAttribute="centerY" id="ov0-qI-7J3"/>
-                                <constraint firstAttribute="trailing" secondItem="De1-Cg-kBb" secondAttribute="trailing" constant="180" id="pca-Re-uBR"/>
-                                <constraint firstAttribute="bottom" secondItem="cf2-eo-TZZ" secondAttribute="bottom" constant="5" id="tom-qD-QMc"/>
+                                <constraint firstItem="De1-Cg-kBb" firstAttribute="centerX" secondItem="FYR-Km-8NT" secondAttribute="centerX" id="qyN-Po-pBd"/>
                             </constraints>
                         </view>
                     </subviews>

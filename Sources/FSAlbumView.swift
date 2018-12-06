@@ -17,6 +17,10 @@ public protocol FSAlbumViewDelegate: class {
     func albumViewCameraRollAuthorized()
     func albumbSelectionLimitReached()
     func albumShouldEnableDoneButton(isEnabled: Bool)
+    
+     func closeByHandler()  // 添加关闭按钮的响应
+    
+     func nextByHandler()  // 添加下一步即保存的响应
 }
 
 final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDelegate, PHPhotoLibraryChangeObserver, UIGestureRecognizerDelegate {
@@ -27,6 +31,12 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
     @IBOutlet weak var collectionViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var imageCropViewConstraintTop: NSLayoutConstraint!
 
+    
+    @IBOutlet weak var closeButton: UIButton!
+    
+    
+    @IBOutlet weak var nextButton: UIButton!
+    
     weak var delegate: FSAlbumViewDelegate? = nil
     var allowMultipleSelection = false
     var photoSelectionLimit = 1
@@ -67,6 +77,12 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
     func initialize() {
         guard images == nil else { return }
 
+        let bundle = Bundle(for: self.classForCoder)
+        let closeImage = fusumaCloseImage != nil ? fusumaCloseImage : UIImage(named: "ic_close", in: bundle, compatibleWith: nil)
+        
+        closeButton.setImage(closeImage?.withRenderingMode(.alwaysOriginal), for: .normal)
+        
+        
         isHidden = false
 
         // Set Image Crop Ratio
@@ -131,6 +147,17 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
         }
     }
 
+    
+    @IBAction func closeHandler(_ sender: UIButton) {
+        delegate?.closeByHandler()
+    }
+    
+    
+    @IBAction func nextHandler(_ sender: UIButton) {
+        delegate?.nextByHandler()
+    }
+    
+    
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }

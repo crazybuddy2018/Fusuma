@@ -63,7 +63,7 @@ final class FSCameraView: UIView, UIGestureRecognizerDelegate {
 
         let closeImage = fusumaCloseImage != nil ? fusumaCloseImage : UIImage(named: "ic_close", in: bundle, compatibleWith: nil)
         
-        closeButton.setImage(closeImage?.withRenderingMode(.alwaysTemplate), for: .normal)
+        closeButton.setImage(closeImage?.withRenderingMode(.alwaysOriginal), for: .normal)
         
         flashOnImage = fusumaFlashOnImage != nil ? fusumaFlashOnImage : UIImage(named: "ic_flash_on", in: bundle, compatibleWith: nil)
         flashOffImage = fusumaFlashOffImage != nil ? fusumaFlashOffImage : UIImage(named: "ic_flash_off", in: bundle, compatibleWith: nil)
