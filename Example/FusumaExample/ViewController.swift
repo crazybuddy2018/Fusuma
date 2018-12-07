@@ -13,6 +13,10 @@ class ViewController: UIViewController, FusumaDelegate {
     @IBOutlet weak var showButton: UIButton!
     @IBOutlet weak var fileUrlLabel: UILabel!
 
+      @IBOutlet weak var imageView1: UIImageView!
+    
+      @IBOutlet weak var imageView2: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -59,7 +63,14 @@ class ViewController: UIViewController, FusumaDelegate {
 
         for image in images {
             DispatchQueue.main.asyncAfter(deadline: .now() + (3.0 * count)) {
-                self.imageView.image = image
+                if count == 0 {
+                      self.imageView.image = image
+                }else if count == 1 {
+                      self.imageView1.image = image
+                }else if count == 2 {
+                      self.imageView2.image = image
+                }
+              
                 print("w: \(image.size.width) - h: \(image.size.height)")
             }
 
@@ -74,12 +85,14 @@ class ViewController: UIViewController, FusumaDelegate {
         var count: Double = 0
         
         for image in images {
-            DispatchQueue.main.asyncAfter(deadline: .now() + (3.0 * count)) {
+            if count == 0 {
                 self.imageView.image = image
-                print("w: \(image.size.width) - h: \(image.size.height)")
+            }else if count == 1 {
+                self.imageView1.image = image
+            }else if count == 2 {
+                self.imageView2.image = image
             }
-            
-            count += 1
+           count += 1
         }
         for image in metaData {
            // DispatchQueue.main.asyncAfter(deadline: .now() + (3.0 * count)) {

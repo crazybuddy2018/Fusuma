@@ -32,7 +32,13 @@ final class FSAlbumViewCell: UICollectionViewCell {
     
     var num = 0 {
         didSet{
-            numButton.setTitle("\(num)", for: .normal)
+            if num > 0 {
+                 numButton.isHidden = false
+                 numButton.setTitle("\(num)", for: .normal)
+            }else{
+                 numButton.isHidden = true
+            }
+           
         }
     }
 
@@ -47,8 +53,13 @@ final class FSAlbumViewCell: UICollectionViewCell {
         numButton.isUserInteractionEnabled = false
     }
 
+    
+    
     override var isSelected : Bool {
+       
+        
         didSet {
+             print(#function + "\(isSelected)")
             if selectedLayer.superlayer == self.layer {
                 selectedLayer.removeFromSuperlayer()
                // checkmarkImageView.isHidden = true
@@ -61,7 +72,10 @@ final class FSAlbumViewCell: UICollectionViewCell {
                 //checkmarkImageView.isHidden = false
                 self.bringSubviewToFront(numButton)
                 numButton.isHidden = false
+              
             }
+            
         }
+        
     }
 }

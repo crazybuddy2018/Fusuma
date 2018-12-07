@@ -421,22 +421,19 @@ public struct ImageMetadata {
 
     private func fusumaDidFinishInMultipleMode() {
         guard let view = albumView.imageCropView else { return }
-
+/*
         let normalizedX = view.contentOffset.x / view.contentSize.width
         let normalizedY = view.contentOffset.y / view.contentSize.height
         let normalizedWidth  = view.frame.width / view.contentSize.width
         let normalizedHeight = view.frame.height / view.contentSize.height
-
-        let cropRect = CGRect(x: normalizedX,
-                              y: normalizedY,
-                              width: normalizedWidth,
-                              height: normalizedHeight)
+*/
+        let cropRect = albumView.imageCropViewFrames
 
         var images = [UIImage]()
         var metaData = [ImageMetadata]()
 
-        for asset in albumView.selectedAssets {
-            requestImage(with: asset, cropRect: cropRect) { asset, result in
+        for (index,asset) in albumView.selectedAssets.enumerated() {
+            requestImage(with: asset, cropRect: cropRect[index]) { asset, result in
                 images.append(result)
                 metaData.append(self.getMetaData(asset: asset))
 

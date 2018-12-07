@@ -52,6 +52,8 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
     var selectedImages: [UIImage] = []
     var selectedAssets: [PHAsset] = []
 
+    var imageCropViewFrames = [CGRect]()
+    
     // Variables for calculating the position
     enum Direction {
         case scroll
@@ -250,9 +252,43 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
 
                 dragDirection = Direction.up
             }
+            
+            print("end")
+           cropFrameAddOrUpdate(false)
         }
+
+       // print(#function + "::\(sender.state.rawValue)")
     }
 
+    
+    // MARK: - 多剪裁的frame设置
+    
+    func cropFrameAddOrUpdate(_ add:Bool = true)  {
+        var view = imageCropView!
+        let normalizedX = view.contentOffset.x / view.contentSize.width
+        let normalizedY = view.contentOffset.y / view.contentSize.height
+        let normalizedWidth  = view.frame.width / view.contentSize.width
+        let normalizedHeight = view.frame.height / view.contentSize.height
+        let cropRect = CGRect(x: normalizedX,
+                              y: normalizedY,
+                              width: normalizedWidth,
+                              height: normalizedHeight)
+        if add {
+            imageCropViewFrames.append(cropRect)
+        }else {
+           
+            
+            // 删除最后一个并且更新
+            if imageCropViewFrames.last !=  nil {
+                imageCropViewFrames.remove(at: imageCropViewFrames.count - 1)
+                imageCropViewFrames.append(cropRect)
+            }
+           
+        }
+        
+    }
+    
+    
     // MARK: - UICollectionViewDelegate Protocol
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -265,6 +301,9 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
         // 添加数字标号
         if let index = selectedAssets.firstIndex(where: { $0 == asset}) {
             cell.num = index + 1
+        }else{
+            cell.num = 0
+             cell.isSelected = false
         }
         
         imageManager?.requestImage(for: asset,
@@ -294,6 +333,9 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if photoSelectionLimit > 0 && selectedImages.count + 1 <= photoSelectionLimit {
+            
+            
+          
             // 点击之后直接更新数字
             var cell = collectionView.cellForItem(at: indexPath) as! FSAlbumViewCell
             cell.num = selectedImages.count + 1
@@ -314,6 +356,10 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
             dragDirection = Direction.up
             delegate?.albumShouldEnableDoneButton(isEnabled: true)
             collectionView.scrollToItem(at: indexPath, at: .top, animated: true)
+            
+            // 新增frame
+            cropFrameAddOrUpdate()
+            
         } else {
             delegate?.albumbSelectionLimitReached()
             collectionView.deselectItem(at: indexPath, animated: true)
@@ -327,14 +373,16 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
         if let selected = selectedAsset {
             selectedImages.remove(at: selected.offset)
             selectedAssets.remove(at: selected.offset)
+            imageCropViewFrames.remove(at: selected.offset)
             // 重新更新数字
             for (i,item) in selectedAssets.enumerated() {
                 let index = images.index(of: item) // index 一定大于负数
                 var indexPath = IndexPath(row: index, section: 0)
-                if let  cell = collectionView.cellForItem(at: indexPath) as? FSAlbumViewCell{
+                if let  cell = self.collectionView.cellForItem(at: indexPath) as? FSAlbumViewCell{
                     cell.num = i + 1
                 }
             }
+            
         }
 
         if selectedImages.count > 0 {
@@ -362,10 +410,24 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
             guard let collectionChanges = changeInstance.changeDetails(for: self.images) else {
                 return
             }
-
+            let temp = self.selectedAssets
+            for (i,item) in temp.enumerated() {
+                let index = self.images.index(of: item) // index 一定大于负数
+                var indexPath = IndexPath(row: index, section: 0)
+                if let  cell = self.collectionView.cellForItem(at: indexPath) as? FSAlbumViewCell{
+                    cell.num = 0
+                    cell.isSelected = false
+                    print("========unselect::\(index)")
+                }
+            }
+            
+            
             self.selectedImages.removeAll()
             self.selectedAssets.removeAll()
-
+            self.imageCropViewFrames.removeAll()
+            
+           
+            
             self.images = collectionChanges.fetchResultAfterChanges
 
             let collectionView = self.collectionView!
@@ -387,6 +449,8 @@ final class FSAlbumView: UIView, UICollectionViewDataSource, UICollectionViewDel
                         collectionView.reloadItems(at: changedIndexes.aapl_indexPathsFromIndexesWithSection(0))
                     }
                 }, completion: nil)
+                
+                
             }
 
             self.resetCachedAssets()
